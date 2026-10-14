@@ -2,253 +2,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090909">
-  <meta name="description" content="Justice Photoshop — a professional photo editing studio powered by Photopea.">
-  <title>Justice Photoshop</title>
-  <link rel="manifest" href="/manifest.json">
-  <style>
-    :root {
-      color-scheme: dark;
-      --gold: #d4af37;
-      --black: #090909;
-      --panel: #141414;
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--black);
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      min-height: 100dvh;
-    }
-
-    header {
-      min-height: 66px;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      background: #101010;
-      border-bottom: 1px solid #705b21;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-    }
-
-    .logo {
-      width: 43px;
-      height: 43px;
-      display: grid;
-      place-items: center;
-      border: 2px solid var(--gold);
-      border-radius: 10px;
-      color: var(--gold);
-      font-size: 20px;
-      font-weight: 900;
-    }
-
-    h1 {
-      font-size: 17px;
-      letter-spacing: 1.4px;
-      margin: 0;
-      color: var(--gold);
-    }
-
-    .subtitle {
-      margin-top: 4px;
-      font-size: 11px;
-      color: #b8b8b8;
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    button {
-      padding: 10px 13px;
-      border: 1px solid var(--gold);
-      border-radius: 7px;
-      background: transparent;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    button.primary {
-      color: #090909;
-      background: var(--gold);
-    }
-
-    button:hover { filter: brightness(1.15); }
-
-    .notice {
-      padding: 8px 14px;
-      text-align: center;
-      font-size: 11px;
-      color: #c8c8c8;
-      background: #191919;
-      border-bottom: 1px solid #292929;
-    }
-
-    main {
-      flex: 1;
-      min-height: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .editor {
-      position: relative;
-      flex: 1;
-      min-height: 350px;
-      background: #202020;
-    }
-
-    iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      min-height: 350px;
-      border: 0;
-      background: #202020;
-    }
-
-    footer {
-      padding: 9px;
-      text-align: center;
-      font-size: 10px;
-      color: #999;
-      background: #101010;
-      border-top: 1px solid #393020;
-    }
-
-    @media (max-width: 520px) {
-      header { padding: 10px; }
-      h1 { font-size: 14px; }
-      .logo { width: 38px; height: 38px; }
-      button { padding: 9px 10px; }
-      .editor, iframe { min-height: 300px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0b0b">
+<meta name="description" content="Justice Photoshop - your creative editing studio">
+<title>Justice Photoshop</title>
+<link rel="manifest" href="/manifest.json">
+<style>
+:root{--bg:#0b0b0d;--panel:#151518;--line:#303034;--gold:#d4af37;--muted:#a4a4aa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#eee;font:13px Arial,sans-serif;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+button,input,select{font:inherit}
+button{background:#202024;border:1px solid #38383d;color:#eee;padding:8px 10px;border-radius:5px;cursor:pointer}
+button:hover,button.active{border-color:var(--gold);color:var(--gold)}
+button:disabled{opacity:.35;cursor:not-allowed}
+header{height:56px;flex-shrink:0;background:#101012;border-bottom:1px solid #4b4020;display:flex;align-items:center;justify-content:space-between;padding:0 13px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;min-width:180px}
+.logo{height:34px;width:34px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:7px;color:var(--gold);font-weight:bold;font-size:20px}
+.brand strong{color:var(--gold);letter-spacing:1.5px}
+.brand small{display:block;color:#999;margin-top:3px;font-size:10px}
+.top-actions{display:flex;gap:6px;align-items:center;overflow-x:auto}
+.menubar{display:flex;gap:3px;padding:5px 9px;background:#121214;border-bottom:1px solid var(--line);flex-shrink:0;overflow-x:auto}
+.menubar button{border:0;background:transparent;padding:7px 10px;white-space:nowrap}
+.workspace{display:grid;grid-template-columns:54px minmax(0,1fr) 230px;flex:1;min-height:0}
+.toolbar{background:var(--panel);border-right:1px solid var(--line);padding:8px 5px;display:flex;flex-direction:column;gap:5px;align-items:center;overflow:auto}
+.tool{width:40px;height:38px;padding:0;font-size:17px}
+.tool-label{font-size:9px;color:#aaa;text-align:center}
+.center{display:flex;flex-direction:column;min-width:0;min-height:0}
+.options{min-height:43px;display:flex;align-items:center;gap:10px;padding:7px 10px;background:#19191c;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+.options label{display:flex;align-items:center;gap:5px;color:#bbb}
+input[type=range]{width:75px;accent-color:var(--gold)}
+input[type=color]{width:28px;height:26px;border:0;background:none;padding:0}
+.stage{position:relative;flex:1;min-height:0;overflow:auto;display:flex;align-items:center;justify-content:center;background-color:#252528;background-image:linear-gradient(45deg,#303034 25%,transparent 25%),linear-gradient(-45deg,#303034 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#303034 75%),linear-gradient(-45deg,transparent 75%,#303034 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
+#canvas{display:block;background:white;box-shadow:0 5px 28px #0009;touch-action:none;max-width:none}
+.welcome{position:absolute;max-width:320px;padding:24px;text-align:center;background:#17171bdc;border:1px solid #514522;border-radius:12px;pointer-events:none}
+.welcome h2{color:var(--gold);letter-spacing:2px}
+.welcome p{color:#bbb;line-height:1.7}
+.right{background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:12px}
+.panel{border:1px solid var(--line);border-radius:7px;margin-bottom:12px;overflow:hidden}
+.panel-title{padding:11px;background:#202024;font-weight:bold;color:var(--gold);border-bottom:1px solid var(--line)}
+.panel-body{padding:10px;display:flex;flex-direction:column;gap:10px}
+.panel-body label{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#ccc}
+.panel-body input[type=range]{width:95px}
+.panel-body input[type=number],.panel-body select,.panel-body input[type=text]{background:#101012;border:1px solid #444;color:white;padding:6px;width:100%;border-radius:4px}
+.layer{display:flex;gap:8px;align-items:center;padding:9px;border:1px solid #444;border-radius:5px;background:#101012}
+.layer .thumb{width:35px;height:30px;border:1px solid #555;background:white}
+.layer small{color:#bbb}
+.status{height:27px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:#101012;border-top:1px solid var(--line);font-size:11px;color:#aaa;gap:8px}
+.gold{color:var(--gold)}
+@media(max-width:700px){
+ header{height:51px;padding:0 7px}.brand{min-width:0}.brand strong{font-size:12px}.brand small{display:none}.logo{width:30px;height:30px}
+ .top-actions button{padding:7px;font-size:11px}
+ .workspace{grid-template-columns:44px minmax(0,1fr)}
+ .toolbar{grid-column:1;grid-row:1 / span 2}.center{grid-column:2;grid-row:1}.right{grid-column:2;grid-row:2;border-left:0;border-top:1px solid var(--line);max-height:200px}
+ .tool{width:34px;height:34px}.options{gap:7px;font-size:11px}.right{display:block}
+ .menubar{padding:3px}.menubar button{padding:7px}
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <div class="logo">J</div>
-      <div>
-        <h1>JUSTICE PHOTOSHOP</h1>
-        <div class="subtitle">YOUR CREATIVE STUDIO</div>
-      </div>
-    </div>
-
-    <div class="actions">
-      <button id="installBtn" class="primary" hidden>
-        Install App
-      </button>
-      <button id="fullscreenBtn">Full Screen</button>
-      <button id="openBtn">Open Editor ↗</button>
-    </div>
-  </header>
-
-  <div class="notice">
-    Professional photo editing powered by Photopea.
-    Internet connection required.
+<header>
+ <div class="brand"><div class="logo">J</div><div><strong>JUSTICE PHOTOSHOP</strong><small>CREATIVE EDITING STUDIO</small></div></div>
+ <div class="top-actions">
+  <button id="openBtn">Open Image</button>
+  <button id="undoBtn" disabled>↶</button>
+  <button id="redoBtn" disabled>↷</button>
+  <button id="saveBtn" class="active">Export PNG</button>
+ </div>
+</header>
+<nav class="menubar">
+ <button id="fileMenu">File ▾</button><button id="editMenu">Edit ▾</button><button id="imageMenu">Image ▾</button><button id="filterMenu">Filter ▾</button><button id="viewMenu">View ▾</button>
+</nav>
+<div class="workspace">
+ <aside class="toolbar" aria-label="Tools">
+  <button class="tool active" data-tool="brush" title="Brush">🖌</button><span class="tool-label">Brush</span>
+  <button class="tool" data-tool="eraser" title="Eraser">◩</button><span class="tool-label">Eraser</span>
+  <button class="tool" data-tool="line" title="Line">╱</button><span class="tool-label">Line</span>
+  <button class="tool" data-tool="rect" title="Rectangle">▱</button><span class="tool-label">Shape</span>
+  <button class="tool" data-tool="text" title="Text">T</button><span class="tool-label">Text</span>
+  <button class="tool" data-tool="move" title="Move canvas content">✥</button><span class="tool-label">Move</span>
+  <button class="tool" data-tool="picker" title="Color picker">◉</button><span class="tool-label">Picker</span>
+  <button class="tool" data-tool="crop" title="Crop">⛶</button><span class="tool-label">Crop</span>
+ </aside>
+ <section class="center">
+  <div class="options">
+   <label>Color <input id="color" type="color" value="#d4af37"></label>
+   <label>Size <input id="size" type="range" min="1" max="100" value="8"><span id="sizeVal">8</span></label>
+   <label>Zoom <input id="zoom" type="range" min="10" max="150" value="70"><span id="zoomVal">70%</span></label>
+   <button id="clearBtn">Clear</button>
   </div>
-
-  <main>
-    <section class="editor" id="editor">
-      <iframe
-        id="photopea"
-        src="https://www.photopea.com/"
-        title="Justice Photoshop Editing Workspace"
-        allow="clipboard-read; clipboard-write"
-        allowfullscreen>
-      </iframe>
-    </section>
-  </main>
-
-  <footer>
-    JUSTICE PHOTOSHOP · Create. Edit. Design.
-    · Editing engine by Photopea
-  </footer>
-
-  <script>
-    const editor = document.getElementById("editor");
-    const frame = document.getElementById("photopea");
-
-    document.getElementById("openBtn").addEventListener("click", () => {
-      window.open(
-        "https://www.photopea.com/",
-        "_blank",
-        "noopener,noreferrer"
-      );
-    });
-
-    document.getElementById("fullscreenBtn").addEventListener("click", async () => {
-      try {
-        if (!document.fullscreenElement) {
-          await editor.requestFullscreen();
-        } else {
-          await document.exitFullscreen();
-        }
-      } catch {
-        window.open("https://www.photopea.com/", "_blank");
-      }
-    });
-
-    let installPrompt;
-
-    const installBtn = document.getElementById("installBtn");
-
-    window.addEventListener("beforeinstallprompt", event => {
-      event.preventDefault();
-      installPrompt = event;
-      installBtn.hidden = false;
-    });
-
-    installBtn.addEventListener("click", async () => {
-      if (!installPrompt) {
-        alert("Use Chrome's menu and choose Install app or Add to Home screen when available.");
-        return;
-      }
-
-      installPrompt.prompt();
-      await installPrompt.userChoice;
-      installPrompt = null;
-      installBtn.hidden = true;
-    });
-
-    window.addEventListener("appinstalled", () => {
-      installBtn.hidden = true;
-    });
-
-    if ("serviceWorker" in navigator && location.protocol === "https:") {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js").catch(error => {
-          console.error("Service worker registration failed:", error);
-        });
-      });
-    }
-  </script>
+  <div class="stage" id="stage">
+   <canvas id="canvas" width="1200" height="800"></canvas>
+   <div class="welcome" id="welcome"><h2>JUSTICE PHOTOSHOP</h2><p>Your creative workspace.<br>Open an image or start drawing.</p><p>Use <b class="gold">Open Image</b> to begin.</p></div>
+  </div>
+ </section>
+ <aside class="right">
+  <div class="panel">
+   <div class="panel-title">Properties</div>
+   <div class="panel-body">
+    <label>Brightness <span id="brightVal">100%</span></label><input id="brightness" type="range" min="0" max="200" value="100">
+    <label>Contrast <span id="contrastVal">100%</span></label><input id="contrast" type="range" min="0" max="200" value="100">
+    <label>Saturation <span id="satVal">100%</span></label><input id="saturation" type="range" min="0" max="200" value="100">
+    <label>Opacity <span id="opacityVal">100%</span></label><input id="opacity" type="range" min="10" max="100" value="100">
+    <button id="applyBtn">Apply Adjustments</button>
+    <button id="resetAdjustBtn">Reset Adjustments</button>
+   </div>
+  </div>
+  <div class="panel">
+   <div class="panel-title">Layers</div>
+   <div class="panel-body">
+    <div class="layer"><div class="thumb"></div><div><b>Background / Artwork</b><br><small>Current canvas</small></div></div>
+    <small style="color:#aaa;line-height:1.6">This first version uses one editable canvas. Separate movable layers will be added in a later upgrade.</small>
+   </div>
+  </div>
+  <div class="panel">
+   <div class="panel-title">Image Information</div>
+   <div class="panel-body" id="info">1200 × 800 px</div>
+  </div>
+ </aside>
+</div>
+<footer class="status"><span id="status">Ready — open an image to start editing.</span><span id="dimensions">1200 × 800 px</span></footer>
+<input id="fileInput" type="file" accept="image/*" hidden>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const canvas=$("canvas"),ctx=canvas.getContext("2d",{willReadFrequently:true});
+let tool="brush",drawing=false,start=null,last=null,history=[],redoHistory=[],baseSnapshot=null;
+let zoom=70,opacity=1,cropRect=null;
+function initialCanvas(){
+ ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);
+ ctx.fillStyle="#eeeeee";ctx.fillRect(0,0,canvas.width,canvas.height);
+ ctx.fillStyle="#d4af37";ctx.fillRect(70,70,canvas.width-140,5);
+ ctx.fillStyle="#222222";ctx.font="bold 48px Arial";ctx.fillText("JUSTICE PHOTOSHOP",75,145);
+ ctx.fillStyle="#777777";ctx.font="24px Arial";ctx.fillText("Create something amazing.",75,195);
+ baseSnapshot=ctx.getImageData(0,0,canvas.width,canvas.height);
+}
+function snapshot(){
+ try{history.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(history.length>25)history.shift();redoHistory=[];updateHistoryButtons()}catch(e){}
+}
+function updateHistoryButtons(){$("undoBtn").disabled=!history.length;$("redoBtn").disabled=!redoHistory.length}
+function setStatus(s){$("status").textContent=s}
+function updateDimensions(){let s=canvas.width+" × "+canvas.height+" px";$("dimensions").textContent=s;$("info").textContent=s}
+function setZoom(v){zoom=Number(v);$("zoomVal").textContent=zoom+"%";canvas.style.width=(canvas.width*zoom/100)+"px";canvas.style.height=(canvas.height*zoom/100)+"px"}
+function setTool(t){tool=t;document.querySelectorAll("[data-tool]").forEach(b=>b.classList.toggle("active",b.dataset.tool===t));setStatus("Tool: "+t)}
+function point(e){let r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
+function style(){ctx.lineWidth=Number($("size").value);ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=$("color").value;ctx.fillStyle=$("color").value;ctx.globalAlpha=opacity;ctx.globalCompositeOperation=tool==="eraser"?"destination-out":"source-over"}
+function restoreComposite(){ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over"}
+function redrawPreview(p){
+ ctx.putImageData(history[history.length-1],0,0);style();
+ if(tool==="line"||tool==="rect"){
+  ctx.beginPath();
+  if(tool==="line"){ctx.moveTo(start.x,start.y);ctx.lineTo(p.x,p.y);ctx.stroke()}
+  else{ctx.strokeRect(start.x,start.y,p.x-start.x,p.y-start.y)}
+ }
+ restoreComposite();
+}
+canvas.addEventListener("pointerdown",e=>{
+ e.preventDefault();let p=point(e);
+ if(tool==="picker"){try{let d=ctx.getImageData(Math.max(0,Math.min(canvas.width-1,Math.floor(p.x))),Math.max(0,Math.min(canvas.height-1,Math.floor(p.y))),1,1).data;$("color").value="#"+[d[0],d[1],d[2]].map(v=>v.toString(16).padStart(2,"0")).join("");setStatus("Color selected")}catch(err){}return}
+ if(tool==="text"){let text=prompt("Enter the text to add:");if(text){snapshot();ctx.globalAlpha=opacity;ctx.globalCompositeOperation="source-over";ctx.fillStyle=$("color").value;ctx.font="bold "+Math.max(16,Number($("size").value)*4)+"px Arial";ctx.fillText(text,p.x,p.y);restoreComposite();setStatus("Text added")}return}
+ if(tool==="crop"){if(!cropRect){cropRect={x:p.x,y:p.y,w:0,h:0};start=p;setStatus("Drag to select crop area, then click Crop again")}else{let r=cropRect;let x=Math.max(0,Math.floor(Math.min(r.x,r.x+r.w))),y=Math.max(0,Math.floor(Math.min(r.y,r.y+r.h))),w=Math.min(canvas.width-x,Math.floor(Math.abs(r.w))),h=Math.min(canvas.height-y,Math.floor(Math.abs(r.h)));if(w>0&&h>0){snapshot();let d=ctx.getImageData(x,y,w,h);canvas.width=w;canvas.height=h;ctx.putImageData(d,0,0);updateDimensions();setZoom(zoom)}cropRect=null;setStatus("Crop completed")}return}
+ if(tool==="move"){setStatus("Move tool selected. Use crop or draw tools to edit this canvas.");return}
+ drawing=true;start=p;last=p;
+ if(tool==="brush"||tool==="eraser"){snapshot();style();ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+0.1,p.y+0.1);ctx.stroke();restoreComposite()}
+ else if(tool==="line"||tool==="rect"){snapshot()}
+ canvas.setPointerCapture(e.pointerId);
+});
+canvas.addEventListener("pointermove",e=>{
+ let p=point(e);if(!drawing){return}
+ if(tool==="brush"||tool==="eraser"){style();ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();restoreComposite();last=p}
+ else if((tool==="line"||tool==="rect")&&history.length)redrawPreview(p);
+ else if(tool==="crop"&&cropRect){cropRect.w=p.x-cropRect.x;cropRect.h=p.y-cropRect.y}
+});
+function finish(e){
+ if(!drawing)return;drawing=false;let p=point(e);
+ if(tool==="line"||tool==="rect"){if(history.length)redrawPreview(p)}
+ restoreComposite();updateHistoryButtons();
+ if(tool==="brush"||tool==="eraser"||tool==="line"||tool==="rect")setStatus("Changes made — use Undo if needed");
+}
+canvas.addEventListener("pointerup",finish);
+canvas.addEventListener("pointercancel",finish);
+document.querySelectorAll("[data-tool]").forEach(b=>b.addEventListener("click",()=>setTool(b.dataset.tool)));
+$("size").addEventListener("input",()=> $("sizeVal").textContent=$("size").value);
+$("zoom").addEventListener("input",e=>setZoom(e.target.value));
+$("opacity").addEventListener("input",e=>{opacity=Number(e.target.value)/100;$("opacityVal").textContent=e.target.value+"%"});
+$("openBtn").onclick=()=>$("fileInput").click();
+$("fileInput").addEventListener("change",e=>{
+ let f=e.target.files[0];if(!f)return;
+ if(!f.type.startsWith("image/")){alert("Please choose an image file.");return}
+ let url=URL.createObjectURL(f),img=new Image();
+ img.onload=()=>{
+  snapshot();canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+  ctx.drawImage(img,0,0);baseSnapshot=ctx.getImageData(0,0,canvas.width,canvas.height);
+  history=[];redoHistory=[];updateHistoryButtons();updateDimensions();
+  $("welcome").hidden=true;setZoom(Math.min(100,Math.floor(Math.min(($("stage").clientWidth-30)/canvas.width*100,($("stage").clientHeight-30)/canvas.height*100))||50));
+  $("zoom").value=zoom;URL.revokeObjectURL(url);setStatus("Opened: "+f.name);
+ };img.onerror=()=>{alert("Could not open this image.");URL.revokeObjectURL(url)};img.src=url;e.target.value="";
+});
+$("undoBtn").onclick=()=>{if(!history.length)return;redoHistory.push(ctx.getImageData(0,0,canvas.width,canvas.height));ctx.putImageData(history.pop(),0,0);updateHistoryButtons();setStatus("Undo complete")};
+$("redoBtn").onclick=()=>{if(!redoHistory.length)return;history.push(ctx.getImageData(0,0,canvas.width,canvas.height));ctx.putImageData(redoHistory.pop(),0,0);updateHistoryButtons();setStatus("Redo complete")};
+$("saveBtn").onclick=()=>{
+ const a=document.createElement("a");a.download="justice-photoshop.png";a.href=canvas.toDataURL("image/png");a.click();setStatus("PNG exported");
+};
+$("clearBtn").onclick=()=>{if(!confirm("Clear the entire canvas?"))return;snapshot();ctx.clearRect(0,0,canvas.width,canvas.height);restoreComposite();setStatus("Canvas cleared")};
+function adjustmentValues(){return{brightness:Number($("brightness").value),contrast:Number($("contrast").value),saturation:Number($("saturation").value)}}
+["brightness","contrast","saturation"].forEach(id=>$(id).addEventListener("input",()=>{
+ const v=$(id).value;$((id==="brightness"?"brightVal":id==="contrast"?"contrastVal":"satVal")).textContent=v+"%";
+ canvas.style.filter="brightness("+$("brightness").value+"%) contrast("+$("contrast").value+"%) saturate("+$("saturation").value+"%)";
+}));
+$("applyBtn").onclick=()=>{
+ snapshot();let b=Number($("brightness").value)/100,c=Number($("contrast").value)/100,s=Number($("saturation").value)/100;
+ let image=ctx.getImageData(0,0,canvas.width,canvas.height),d=image.data;
+ let avg=(d[0]+d[1]+d[2])/3;
+ for(let i=0;i<d.length;i+=4){for(let k=0;k<3;k++){let v=d[i+k]*b;v=(v-128)*c+128;v=avg+(v-avg)*s;d[i+k]=Math.max(0,Math.min(255,v))}}
+ ctx.putImageData(image,0,0);canvas.style.filter="none";
+ ["brightness","contrast","saturation"].forEach(id=>$(id).value=100);
+ ["brightVal","contrastVal","satVal"].forEach(id=>$(id).textContent="100%");
+ setStatus("Adjustments applied to image");
+};
+$("resetAdjustBtn").onclick=()=>{["brightness","contrast","saturation"].forEach(id=>$(id).value=100);["brightVal","contrastVal","satVal"].forEach(id=>$(id).textContent="100%");canvas.style.filter="none";setStatus("Preview adjustments reset")};
+$("fileMenu").onclick=()=>{let a=prompt("File menu:\n1 = Open image\n2 = Export PNG\n3 = Clear canvas\nEnter 1, 2 or 3");if(a==="1")$("fileInput").click();if(a==="2")$("saveBtn").click();if(a==="3")$("clearBtn").click()};
+$("editMenu").onclick=()=>{let a=prompt("Edit menu:\n1 = Undo\n2 = Redo");if(a==="1")$("undoBtn").click();if(a==="2")$("redoBtn").click()};
+$("imageMenu").onclick=()=>{let a=prompt("Image menu:\n1 = Apply adjustments\n2 = Reset adjustment preview");if(a==="1")$("applyBtn").click();if(a==="2")$("resetAdjustBtn").click()};
+$("filterMenu").onclick=()=>{let a=prompt("Filter:\n1 = Grayscale\n2 = Sepia\n3 = Invert\n4 = Blur");if(!["1","2","3","4"].includes(a||""))return;snapshot();let f={1:"grayscale(100%)",2:"sepia(100%)",3:"invert(100%)",4:"blur(2px)"}[a];canvas.style.filter=f;setStatus("Filter preview applied. Click Apply Adjustments to bake brightness/contrast/saturation; other filters are currently previews.")};
+$("viewMenu").onclick=()=>{let a=prompt("View menu:\n1 = Zoom in\n2 = Zoom out\n3 = Fit canvas");if(a==="1")setZoom(Math.min(150,zoom+10));if(a==="2")setZoom(Math.max(10,zoom-10));if(a==="3"){setZoom(Math.max(10,Math.min(100,Math.floor(Math.min(($("stage").clientWidth-30)/canvas.width*100,($("stage").clientHeight-30)/canvas.height*100)))));$("zoom").value=zoom}};
+initialCanvas();setZoom(70);updateDimensions();
+if("serviceWorker" in navigator&&location.protocol==="https:"){window.addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}))}
+})();
+</script>
 </body>
 </html>
