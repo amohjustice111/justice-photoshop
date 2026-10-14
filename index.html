@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="Justice Photoshop — a professional photo editing studio powered by Photopea.">
+  <title>Justice Photoshop</title>
+  <link rel="manifest" href="/manifest.json">
+  <style>
+    :root {
+      color-scheme: dark;
+      --gold: #d4af37;
+      --black: #090909;
+      --panel: #141414;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--black);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    header {
+      min-height: 66px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: #101010;
+      border-bottom: 1px solid #705b21;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .logo {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    h1 {
+      font-size: 17px;
+      letter-spacing: 1.4px;
+      margin: 0;
+      color: var(--gold);
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #b8b8b8;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 10px 13px;
+      border: 1px solid var(--gold);
+      border-radius: 7px;
+      background: transparent;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.primary {
+      color: #090909;
+      background: var(--gold);
+    }
+
+    button:hover { filter: brightness(1.15); }
+
+    .notice {
+      padding: 8px 14px;
+      text-align: center;
+      font-size: 11px;
+      color: #c8c8c8;
+      background: #191919;
+      border-bottom: 1px solid #292929;
+    }
+
+    main {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .editor {
+      position: relative;
+      flex: 1;
+      min-height: 350px;
+      background: #202020;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 350px;
+      border: 0;
+      background: #202020;
+    }
+
+    footer {
+      padding: 9px;
+      text-align: center;
+      font-size: 10px;
+      color: #999;
+      background: #101010;
+      border-top: 1px solid #393020;
+    }
+
+    @media (max-width: 520px) {
+      header { padding: 10px; }
+      h1 { font-size: 14px; }
+      .logo { width: 38px; height: 38px; }
+      button { padding: 9px 10px; }
+      .editor, iframe { min-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">J</div>
+      <div>
+        <h1>JUSTICE PHOTOSHOP</h1>
+        <div class="subtitle">YOUR CREATIVE STUDIO</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="installBtn" class="primary" hidden>
+        Install App
+      </button>
+      <button id="fullscreenBtn">Full Screen</button>
+      <button id="openBtn">Open Editor ↗</button>
+    </div>
+  </header>
+
+  <div class="notice">
+    Professional photo editing powered by Photopea.
+    Internet connection required.
+  </div>
+
+  <main>
+    <section class="editor" id="editor">
+      <iframe
+        id="photopea"
+        src="https://www.photopea.com/"
+        title="Justice Photoshop Editing Workspace"
+        allow="clipboard-read; clipboard-write"
+        allowfullscreen>
+      </iframe>
+    </section>
+  </main>
+
+  <footer>
+    JUSTICE PHOTOSHOP · Create. Edit. Design.
+    · Editing engine by Photopea
+  </footer>
+
+  <script>
+    const editor = document.getElementById("editor");
+    const frame = document.getElementById("photopea");
+
+    document.getElementById("openBtn").addEventListener("click", () => {
+      window.open(
+        "https://www.photopea.com/",
+        "_blank",
+        "noopener,noreferrer"
+      );
+    });
+
+    document.getElementById("fullscreenBtn").addEventListener("click", async () => {
+      try {
+        if (!document.fullscreenElement) {
+          await editor.requestFullscreen();
+        } else {
+          await document.exitFullscreen();
+        }
+      } catch {
+        window.open("https://www.photopea.com/", "_blank");
+      }
+    });
+
+    let installPrompt;
+
+    const installBtn = document.getElementById("installBtn");
+
+    window.addEventListener("beforeinstallprompt", event => {
+      event.preventDefault();
+      installPrompt = event;
+      installBtn.hidden = false;
+    });
+
+    installBtn.addEventListener("click", async () => {
+      if (!installPrompt) {
+        alert("Use Chrome's menu and choose Install app or Add to Home screen when available.");
+        return;
+      }
+
+      installPrompt.prompt();
+      await installPrompt.userChoice;
+      installPrompt = null;
+      installBtn.hidden = true;
+    });
+
+    window.addEventListener("appinstalled", () => {
+      installBtn.hidden = true;
+    });
+
+    if ("serviceWorker" in navigator && location.protocol === "https:") {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(error => {
+          console.error("Service worker registration failed:", error);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
